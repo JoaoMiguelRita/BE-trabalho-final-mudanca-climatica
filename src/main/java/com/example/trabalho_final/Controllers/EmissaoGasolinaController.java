@@ -1,6 +1,6 @@
 package com.example.trabalho_final.Controllers;
 
-import com.example.trabalho_final.DPO.EmissaoGasolinaDTO;
+import com.example.trabalho_final.DTO.EmissaoGasolinaDTO;
 import com.example.trabalho_final.Modelos.EmissaoGasolina;
 import com.example.trabalho_final.Services.EmissaoGasolinaService;
 import org.springframework.beans.factory.annotation.Autowired;

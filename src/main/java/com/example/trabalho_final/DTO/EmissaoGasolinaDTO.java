@@ -1,4 +1,4 @@
-package com.example.trabalho_final.DPO;
+package com.example.trabalho_final.DTO;
 
 public class EmissaoGasolinaDTO {
     private double litros;
