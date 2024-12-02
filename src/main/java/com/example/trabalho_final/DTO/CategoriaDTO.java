@@ -1,10 +1,16 @@
 package com.example.trabalho_final.DTO;
 
+
 public class CategoriaDTO {
+
     private Long id;
     private String nome;
 
-    // Getters e Setters
+    public CategoriaDTO(Long id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
+
     public Long getId() {
         return id;
     }

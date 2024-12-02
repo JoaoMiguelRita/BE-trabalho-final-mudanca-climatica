@@ -1,32 +1,20 @@
 package com.example.trabalho_final.DTO;
 
+import jakarta.validation.constraints.NotNull;
+
 public class RelatorioEmissaoDTO {
-    private Long id;
-    private String descricao;
-    private Double emissaoTotal;
+
+    @NotNull
+    private String nomeRelatorio;
+    private double emissaoTotal;
 
     // Getters e Setters
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public Double getEmissaoTotal() {
+    public double getEmissaoTotal() {
         return emissaoTotal;
     }
 
-    public void setEmissaoTotal(Double emissaoTotal) {
+    public void setEmissaoTotal(double emissaoTotal) {
         this.emissaoTotal = emissaoTotal;
     }
 }

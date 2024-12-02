@@ -4,12 +4,11 @@ import com.example.trabalho_final.DTO.AtividadeDTO;
 import com.example.trabalho_final.Modelos.Atividade;
 import com.example.trabalho_final.Modelos.Categoria;
 import com.example.trabalho_final.Repository.AtividadeRepository;
-import com.example.trabalho_final.Repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 public class AtividadeService {
@@ -17,47 +16,37 @@ public class AtividadeService {
     @Autowired
     private AtividadeRepository atividadeRepository;
 
-    @Autowired
-    private CategoriaRepository categoriaRepository;
-
-    public AtividadeDTO criarAtividade(Long categoriaId, AtividadeDTO atividadeDTO) {
-        Categoria categoria = categoriaRepository.findById(categoriaId)
-                .orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
-
+    public Atividade criarAtividade(AtividadeDTO atividadeDTO) {
         Atividade atividade = new Atividade();
-        atividade.setDescricao(atividadeDTO.getDescricao());
-        atividade.setQuantidade(atividadeDTO.getQuantidade());
-        atividade.setFatorEmissao(atividadeDTO.getFatorEmissao());
-        atividade.setCategoria(categoria);
+        atividade.setNome(atividadeDTO.getNome());
 
-        Atividade atividadeSalva = atividadeRepository.save(atividade);
-        return mapToDTO(atividadeSalva);
+        // Salvar no banco de dados
+        return atividadeRepository.save(atividade);
     }
-
-    public List<AtividadeDTO> listarAtividades() {
-        return atividadeRepository.findAll()
-                .stream()
-                .map(this::mapToDTO)
-                .collect(Collectors.toList());
-    }
-
-    public AtividadeDTO buscarAtividadePorId(Long id) {
-        Atividade atividade = atividadeRepository.findById(id)
+    public Atividade atualizarAtividade(Long id, AtividadeDTO atividadeDTO) {
+        // Buscar a atividade existente no banco
+        Atividade atividadeExistente = atividadeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Atividade não encontrada"));
-        return mapToDTO(atividade);
+
+        // Atualizar os dados da atividade
+        atividadeExistente.setNome(atividadeDTO.getNome());
+
+        // Salvar as alterações
+        return atividadeRepository.save(atividadeExistente);
+    }
+    public boolean excluirAtividade(Long id) {
+        if (atividadeRepository.existsById(id)) {
+            atividadeRepository.deleteById(id);
+            return true; // Atividade excluída com sucesso
+        }
+        return false; // Atividade não encontrada ou já foi excluída
     }
 
-    public void deletarAtividade(Long id) {
-        atividadeRepository.deleteById(id);
+    public Atividade buscarAtividadePorId(Long id) {
+        return atividadeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Atividade não encontrada"));
     }
-
-    private AtividadeDTO mapToDTO(Atividade atividade) {
-        AtividadeDTO dto = new AtividadeDTO();
-        dto.setId(atividade.getId());
-        dto.setDescricao(atividade.getDescricao());
-        dto.setQuantidade(atividade.getQuantidade());
-        dto.setFatorEmissao(atividade.getFatorEmissao());
-        dto.setCategoriaId(atividade.getCategoria().getId());
-        return dto;
+    public List<Atividade> buscarTodasAtividades() {
+        return atividadeRepository.findAll();
     }
 }

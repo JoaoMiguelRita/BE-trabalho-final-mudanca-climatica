@@ -1,13 +1,24 @@
 package com.example.trabalho_final.DTO;
 
+import jakarta.validation.constraints.NotNull;
+
 public class EmissaoGasolinaDTO {
-    private double litros;
 
-    public double getLitros() {
-        return litros;
+    @NotNull
+    private String descricao;
+    @NotNull
+    private double quantidadeEmissao;
+    @NotNull
+    private Long atividadeId;
+
+    // Getters e Setters
+
+    public double getQuantidadeEmissao() {
+        return quantidadeEmissao;
     }
 
-    public void setLitros(double litros) {
-        this.litros = litros;
+    public void setQuantidadeEmissao(double quantidadeEmissao) {
+        this.quantidadeEmissao = quantidadeEmissao;
     }
+
 }

@@ -1,27 +1,33 @@
 package com.example.trabalho_final.Modelos;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class EmissaoGasolina {
-    private double litros;
-    private double emissao;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String descricao;
+    private double quantidadeEmissao;
+    private Long atividadeId;
 
-    public EmissaoGasolina(double litros, double emissao){
-        this.litros = litros;
-        this.emissao = emissao;
+    // Getters e Setters
+    public Long getId() {
+        return id;
     }
 
-    public double getLitros() {
-        return litros;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setLitros(double litros) {
-        this.litros = litros;
+    public double getQuantidadeEmissao() {
+        return quantidadeEmissao;
     }
 
-    public double getEmissao() {
-        return emissao;
-    }
-
-    public void setEmissao(double emissao) {
-        this.emissao = emissao;
+    public void setQuantidadeEmissao(double quantidadeEmissao) {
+        this.quantidadeEmissao = quantidadeEmissao;
     }
 }

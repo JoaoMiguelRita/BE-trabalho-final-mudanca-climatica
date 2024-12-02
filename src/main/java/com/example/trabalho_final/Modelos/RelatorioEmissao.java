@@ -4,23 +4,11 @@ import jakarta.persistence.*;
 
 @Entity
 public class RelatorioEmissao {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String descricao;
-
-    private Double emissaoTotal;
-
-    // Construtores
-    public RelatorioEmissao() {
-    }
-
-    public RelatorioEmissao(String descricao, Double emissaoTotal) {
-        this.descricao = descricao;
-        this.emissaoTotal = emissaoTotal;
-    }
+    private String nomeRelatorio;
+    private double emissaoTotal;
 
     // Getters e Setters
     public Long getId() {
@@ -30,20 +18,11 @@ public class RelatorioEmissao {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public Double getEmissaoTotal() {
+    public double getEmissaoTotal() {
         return emissaoTotal;
     }
 
-    public void setEmissaoTotal(Double emissaoTotal) {
+    public void setEmissaoTotal(double emissaoTotal) {
         this.emissaoTotal = emissaoTotal;
     }
 }
